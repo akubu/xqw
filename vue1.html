@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/html">
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/vue/1.0.26/vue.js" > </script>
+
+</head>
+
+
+<body>
+
+<div id="text">
+        <div v-for="plan in plans">
+
+        <my_comp  :plan="plan" :active.sync="active"> </my_comp><br>
+
+
+    </div>
+
+<template id="t1">
+<div>
+    <span>{{plan.model}} </span>
+    <span>{{plan.price}} </span>
+    <button @click="update" v-show="plan.model!=active.model">
+    {{upgrade ? 'update':'degrade'}}
+    </button>
+    <button v-else>Current</button>
+    <strong @click="cross()">x</strong>
+</div>
+</template>
+</div>
+
+<script>
+
+    Vue.component('my_comp',{
+        template:'#t1',
+        props: ['plan','active'],
+
+        methods:{
+            update: function () {
+                this.active=this.plan;
+            },
+            cross: function () {
+              return this.plan;
+            }
+        },
+        computed: {
+
+            upgrade: function () {
+
+                return this.plan.price > this.active.price
+            }
+        }
+
+
+    })
+
+    new Vue({
+
+        el: '#text',
+        data: {
+            plans: [
+                {model: 'abc', price: 1000},
+                {model: 'def', price: 2000},
+                {model: 'ghi', price: 3000},
+            ],
+            active:{}
+        }
+
+
+    })
+
+
+</script>
+
+</body>
+</html>

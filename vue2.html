@@ -1,0 +1,72 @@
+<html>
+<head>
+<style rel="stylesheet" href="bootstrap.css"></style>
+<style>
+
+    .success{background-color: #5bc0de}
+    .error{background-color: red}
+
+</style>
+
+    <script src="https://cdn.jsdelivr.net/vue/1.0.26/vue.js" > </script>
+</head>
+
+
+<body>
+<div id="d1">
+<alert type="error">
+    OMG you hit it right!!
+    </alert>
+<alert type="success" >
+    <span> Success! You made it </span>
+
+</alert>
+<h1>NEW</h1>
+
+<alert type="error" >
+        <span> Success! You made it </span>
+
+</alert>
+
+    <template id="t1">
+
+        <div v-show="show" class={{type}} >
+
+            <slot></slot>
+            <strong style="cursor: pointer" @click="show=false">x</strong>
+
+        </div>
+
+
+    </template>
+
+
+</div>
+
+
+<script>
+
+    Vue.component('alert',{
+
+        template: '#t1',
+        props:['type'],
+        data:function () {
+            return{
+                show:true
+            }
+        }
+
+    })
+    new Vue({
+        el:"#d1"
+
+    })
+
+
+
+
+</script>
+
+
+</body>
+</html>
