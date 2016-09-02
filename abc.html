@@ -1,0 +1,24 @@
+<!Doctype html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<div ng-app="myapp" ng-controller="control">
+<form >
+<input type='text' name='t1' ng-model='n'>Name
+<input type='text' name='t2' ng-model='c'>class
+<input type=submit value="Add" ng-click="insertdata()">
+<input type=submit value="update" ng-click="update()">
+<input type=submit value="delete" ng-click="delete()">
+</form>
+</div>
+<script>
+var app=angular.module("myapp",[]);
+app.controller("control",function($scope,$http){
+$scope.insertdata=function(){
+$http.post("file.php",{'name':$scope.n,'classs':$scope.c})
+.success(function(data,status,header,config){
+console.log("inserted successfully");
+});
+}
+});
+</script>
+</html>
